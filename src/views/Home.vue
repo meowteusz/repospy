@@ -4,7 +4,7 @@ import { Octokit } from 'octokit'
 
 import RepoCard from '@comp/RepoCard.vue'
 
-import repos_json from '@/assets/repos.json'
+import repos_json from '@/assets/json/repos.json'
 
 
 const auth_key = import.meta.env.VITE_REPOSPY_KEY
@@ -42,9 +42,10 @@ repos.value = repos_json.repos
       </a>
     </header>
 
-    <div class="container">
+    <div class="d-flex flex-wrap">
       <RepoCard 
         class="me-2 mb-3" 
+        style="width: 49%;"
         v-for="repo in repos" 
         :key="repo.id" 
         :data="repo" />

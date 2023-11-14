@@ -2,34 +2,30 @@
 import Card from '@comp/SimpleCard.vue'
 import { Octokit } from 'octokit'
 
-const auth_key = import.meta.env.VITE_REPOSPY_KEY;
-
 const octokit = new Octokit({
-  auth: auth_key
+  auth: import.meta.env.VITE_REPOSPY_KEY
 })
 
 const props = defineProps({
   data: Object
 })
 
-// Request a weekday along with a long date
-const options = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric'
-}
-
 function format_date(date) {
-  let timestamp = Date.parse(date)
-  return new Date(timestamp).toLocaleString('en-US', options)
+  // Request a weekday along with a long date
+  let options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+
+  return new Date(Date.parse(date)).toLocaleString('en-US', options)
 }
 
 function last_updated(date) {
-  let updated = Date.parse(date);
-  let current = Date.now();
+  let updated = Date.parse(date)
 
-  return Math.floor((current - updated) / 86400000)
+  return Math.floor((Date.now() - updated) / 86400000)
 }
 
 async function download_repo(owner, repo_name, ref) {
@@ -42,8 +38,12 @@ async function download_repo(owner, repo_name, ref) {
     }
 
   })
-  console.log(res.location)
+
   // window.open(res, '_blank');
+}
+
+function test(){
+  window.open('https://google.com/', '_blank')
 }
 
 </script>
@@ -59,7 +59,7 @@ async function download_repo(owner, repo_name, ref) {
             <a :href="data.html_url" class="nav-link">{{ data.name }}</a>
           </div>
 
-          
+
 
           <h6 class="card-text fw-light">{{ data.description }}</h6>
         </div>
@@ -67,7 +67,8 @@ async function download_repo(owner, repo_name, ref) {
         <!-- Right button cluster -->
         <div class="ms-auto d-flex flex-nowrap">
           <div>
-            <button type="button" class="btn btn-outline-secondary me-2" @click="download_repo(data.owner.login, data.name, data.owner.login)">Download</button>
+            <button type="button" class="btn btn-outline-secondary me-2"
+              @click="test()">Download</button>
             <button type="button" class="btn btn-outline-danger">Delete</button>
           </div>
         </div>
@@ -78,9 +79,9 @@ async function download_repo(owner, repo_name, ref) {
     <div class="card-footer">
       <div class="me-auto fw-lighter">Last updated {{ last_updated(data.updated_at) }} days ago</div>
       <div>
-            <span class="badge bg-secondary">{{ data.visibility }}</span>
-            <span class="badge bg-secondary">{{ data.fork }}</span>
-          </div>
+        <span class="badge bg-secondary me-2">{{ data.visibility }}</span>
+        <span class="badge bg-secondary">{{ data.fork }}</span>
+      </div>
     </div>
 
   </div>
