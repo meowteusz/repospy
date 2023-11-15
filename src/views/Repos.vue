@@ -9,14 +9,22 @@ import Title from '@comp/Title.vue'
 
 // Octokit Imports
 import { Octokit } from 'octokit'
+import { createAppAuth } from '@octokit/auth-app'
 
+const octokit = new Octokit({
+  authStrategy: createAppAuth,
+  auth: {
+    appId: 473003,
+    privateKey: import.meta.env.VITE_REPOSPY_PKEY,
+    clientId: import.meta.env.VITE_REPOSPY_CLIENT_ID,
+    clientSecret: import.meta.env.VITE_REPOSPY_CLIENT_SECRET,
+    type: "app",
+    installationId: 44024455,
+  },
+});
 
 const page = ref('1')
 const repos = ref(null)
-
-const octokit = new Octokit({
-  auth: import.meta.env.VITE_REPOSPY_KEY
-})
 
 function remove_card(name) {
   repos.value = repos.value.filter((e) => e.name !== name)
@@ -38,7 +46,7 @@ async function get_repos() {
   repos.value = res.data
 }
 
-// get_repos()
+get_repos()
 watch(page, get_repos)
 </script>
 
@@ -53,8 +61,15 @@ watch(page, get_repos)
         <Title :title="`MLDS GitHub Repos`" class="py-4" />
 
         <div class="d-flex flex-wrap">
-          <RepoCard class="me-2 mb-3" style="width: 49%;" @response="(name) => remove_card(name)" v-for="repo in repos"
-            :key="repo.id" :data="repo" />
+          <RepoCard 
+          class="me-2 mb-3" 
+          style="width: 49%;" 
+          @response="(name) => remove_card(name)" 
+          v-for="repo in repos"
+          :key="repo.id" 
+          :data="repo"
+          :octokit="octokit" 
+          />
         </div>
       </main>
     </div>

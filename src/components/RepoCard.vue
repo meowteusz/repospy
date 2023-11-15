@@ -1,23 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 
-import { Octokit } from 'octokit'
-import { createAppAuth } from '@octokit/auth-app'
-
-const octokit = new Octokit({
-  authStrategy: createAppAuth,
-  auth: {
-    appId: 473003,
-    privateKey: import.meta.env.VITE_REPOSPY_PKEY,
-    clientId: import.meta.env.VITE_REPOSPY_CLIENT_ID,
-    clientSecret: import.meta.env.VITE_REPOSPY_CLIENT_SECRET,
-    type: "app",
-    installationId: 44024455,
-  },
-});
-
 const props = defineProps({
-  data: Object
+  data: Object,
+  octokit: Object,
 })
 
 const emit = defineEmits(['response'])
