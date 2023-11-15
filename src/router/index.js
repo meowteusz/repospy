@@ -6,17 +6,21 @@ const router = createRouter({
     {
       path: '/repos',
       name: 'repos',
-      component: () => import('@views/Repos.vue')
+      props: true,
+      component: () => import('@views/Repos.vue'),
     },
     {
       path: '/users',
       name: 'users',
-      component: () => import('@views/Users.vue')
+      props: true,
+      component: () => import('@views/Users.vue'),
+
     },
     {
       path: '/teams',
       name: 'teams',
-      component: () => import('@views/Teams.vue')
+      props: true,
+      component: () => import('@views/Teams.vue'),
     },
   ]
 })
