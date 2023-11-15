@@ -6,8 +6,8 @@ import RepoCard from '@comp/RepoCard.vue'
 
 import repos_json from '@/assets/json/repos.json'
 
-
 const auth_key = import.meta.env.VITE_REPOSPY_KEY
+
 const page = ref('1')
 const repos = ref(null)
 
@@ -20,6 +20,8 @@ async function get_repos() {
   const res = await octokit.request('GET /orgs/{org}/repos', {
     org: 'MSIA',
     page: page,
+    sort: 'updated',
+    direction: 'asc',
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
@@ -28,8 +30,8 @@ async function get_repos() {
   repos.value = res.data;
 }
 
-// get_repos()
-// watch(page, get_repos)
+get_repos()
+watch(page, get_repos)
 
 repos.value = repos_json.repos
 </script>
