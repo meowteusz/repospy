@@ -20,6 +20,7 @@ async function get_repos() {
   const res = await octokit.request('GET /orgs/{org}/repos', {
     org: 'MSIA',
     page: page,
+    per_page: 100,
     sort: 'updated',
     direction: 'asc',
     headers: {
@@ -27,7 +28,7 @@ async function get_repos() {
     }
   })
 
-  repos.value = res.data;
+  repos.value = res.data
 }
 
 get_repos()
