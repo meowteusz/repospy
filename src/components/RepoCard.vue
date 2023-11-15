@@ -1,5 +1,4 @@
 <script setup>
-import Card from '@comp/SimpleCard.vue'
 import { Octokit } from 'octokit'
 import { createAppAuth } from '@octokit/auth-app'
 
@@ -18,6 +17,8 @@ const octokit = new Octokit({
 const props = defineProps({
   data: Object
 })
+
+const emit = defineEmits(['response'])
 
 function format_date(date) {
   // Request a weekday along with a long date
@@ -49,13 +50,15 @@ async function download_repo(owner, repo_name, ref) {
   })
 }
 
-async function delete_repo(repo) {
+async function delete_repo(repo_name) {
   let res = await octokit.request('DELETE /repos/MSIA/{repo}', {
-    repo: repo,
+    repo: repo_name,
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
     }
   })
+
+  emit('response', repo_name)
   }
 
 function visibility(vis){

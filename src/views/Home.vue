@@ -4,16 +4,16 @@ import { Octokit } from 'octokit'
 
 import RepoCard from '@comp/RepoCard.vue'
 
-import repos_json from '@/assets/json/repos.json'
-
-const auth_key = import.meta.env.VITE_REPOSPY_KEY
-
 const page = ref('1')
 const repos = ref(null)
 
 const octokit = new Octokit({
-  auth: auth_key
+  auth: import.meta.env.VITE_REPOSPY_KEY
 })
+
+function remove_card(name){
+  repos.value = repos.value.filter((e) => e.name !== name)
+}
 
 async function get_repos() {
   repos.value = null
@@ -32,8 +32,6 @@ async function get_repos() {
 
 get_repos()
 watch(page, get_repos)
-
-repos.value = repos_json.repos
 </script>
 
 <template>
@@ -48,6 +46,7 @@ repos.value = repos_json.repos
       <RepoCard 
         class="me-2 mb-3" 
         style="width: 49%;"
+        @response="(name) => remove_card(name)"
         v-for="repo in repos" 
         :key="repo.id" 
         :data="repo" />
