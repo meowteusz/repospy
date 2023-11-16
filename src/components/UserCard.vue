@@ -60,3 +60,9 @@ async function delete_user(user_name) {
 
     </div>
 </template>
+
+<style>
+img {
+  border-radius: 50%;
+}
+</style>
