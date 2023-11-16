@@ -21,6 +21,7 @@ async function get_users() {
     users.value = null
 
     const res = await props.octokit.request('GET /orgs/MSIA/teams/' + route.params.id + '/members', {
+        per_page: 100,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
         }
