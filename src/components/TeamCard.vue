@@ -22,15 +22,15 @@ async function delete_team(team_name) {
     }
   })
 
-  if(res.status === 204) {
+  if (res.status === 204) {
     deleting_text.value = '☑️'
-  }else{
+  } else {
     deleting.value = false
     console.error(res)
     return
   }
 
-  setTimeout(() =>  emit('response', repo_name), 500)
+  setTimeout(() => emit('response', repo_name), 500)
 }
 
 </script>
@@ -44,7 +44,7 @@ async function delete_team(team_name) {
         <!-- Left div group -->
         <div>
           <div class="card-title fs-4">
-            <a :href="data.html_url" class="nav-link" target="_blank">{{ data.name }}</a>
+            <RouterLink :to="`/team/${data.slug}`" class="nav-link stretched-link">{{ data.name }}</RouterLink>
           </div>
 
           <h6 class="card-text fw-light">{{ data.description }}</h6>
@@ -63,7 +63,8 @@ async function delete_team(team_name) {
       <!-- Right button cluster -->
       <div class="ms-auto d-flex flex-nowrap mt-1">
         <div>
-          <button type="button" class="btn btn-outline-danger" @click="delete_team(data.name)" :disabled="deleting === true">
+          <button type="button" class="btn btn-outline-danger" @click="delete_team(data.name)"
+            :disabled="deleting === true">
             {{ deleting_text }}
             <span v-if="deleting === true" class="spinner-border spinner-border-sm" aria-hidden="true"></span>
           </button>

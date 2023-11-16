@@ -22,6 +22,19 @@ const router = createRouter({
       props: true,
       component: () => import('@views/Teams.vue'),
     },
+    {
+      // We don't want a null team so if they browse
+      // manually to /team and don't supply an ID we
+      // send them to /teams instead.
+      path: '/team',
+      redirect: { name: 'teams' }
+    },
+    {
+      path: '/team/:id',
+      name: 'team',
+      props: true,
+      component: () => import('@views/TeamDetail.vue'),
+    },
   ]
 })
 
