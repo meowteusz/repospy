@@ -26,7 +26,7 @@ const octokit = new Octokit({
 <template>
   <div>
     <Navbar :title="`MLDS`" />
-    <div class="container-fluid">
+    <div class="container-fluid" style="max-width: 85%;">
       <RouterView :octokit="octokit" />
     </div>
     <footer class="pt-3 mt-4 text-body-secondary border-top">© 2023 MLDS IT</footer>

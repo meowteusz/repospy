@@ -25,9 +25,6 @@ const props = defineProps({
                     <li class="nav-item">
                         <RouterLink to="/users" class="nav-link">Users</RouterLink>
                     </li>
-                    <!-- <li class="nav-item">
-                        <RouterLink class="nav-link disabled">Disabled</RouterLink>
-                    </li> -->
                 </ul>
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
