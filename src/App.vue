@@ -3,7 +3,7 @@
 import { RouterView } from 'vue-router'
 
 // Component Imports
-import Sidebar from '@comp/Sidebar.vue'
+import Navbar from '@comp/Navbar.vue'
 
 // Octokit Imports
 import { Octokit } from 'octokit'
@@ -24,17 +24,11 @@ const octokit = new Octokit({
 </script>
 
 <template>
+  <div>
+    <Navbar :title="`MLDS`" />
     <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-3 ms-sm-auto col-lg-2 px-md-4">
-        <Sidebar />
-      </div>
-
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <RouterView :octokit="octokit" />
-      </main>
+      <RouterView :octokit="octokit" />
     </div>
-
     <footer class="pt-3 mt-4 text-body-secondary border-top">© 2023 MLDS IT</footer>
   </div>
 </template>
