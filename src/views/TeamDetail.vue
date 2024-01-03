@@ -31,7 +31,9 @@ async function get_users() {
 }
 
 function remove_card(name) {
-    users.value = users.value.filter((e) => e.name !== name)
+    console.log(users.value)
+    console.log(name)
+    users.value = users.value.filter((e) => e.login !== name)
 }
 
 get_users()

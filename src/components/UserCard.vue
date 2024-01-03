@@ -11,12 +11,13 @@ const emit = defineEmits(['response'])
 const deleting = ref(false)
 const deleting_text = ref('X')
 
-async function delete_user(user_name) {
+async function delete_user(username) {
     deleting.value = true
     deleting_text.value = 'Wait...'
 
-    let res = await octokit.request('DELETE /repos/MSIA/{repo}', {
-        repo: repo_name,
+    let res = await props.octokit.request('DELETE /orgs/{org}/members/{username}', {
+        org: 'MSIA',
+        username: username,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
         }
@@ -29,8 +30,8 @@ async function delete_user(user_name) {
         console.error(res)
         return
     }
-
-    setTimeout(() => emit('response', repo_name), 500)
+    
+    setTimeout(() => emit('response', username), 500)
 }
 
 </script>
@@ -44,7 +45,7 @@ async function delete_user(user_name) {
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title d-flex">{{ data.login }}
-                        <button type="button" class="btn btn-outline-danger ms-auto" @click="delete_team(data.name)"
+                        <button type="button" class="btn btn-outline-danger ms-auto" @click="delete_user(data.login)"
                             :disabled="deleting === true">
                             {{ deleting_text }}
                             <span v-if="deleting === true" class="spinner-border spinner-border-sm"
@@ -63,6 +64,6 @@ async function delete_user(user_name) {
 
 <style>
 img {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 </style>

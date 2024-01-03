@@ -13,7 +13,7 @@ const props = defineProps({
 const page = ref('1')
 const users = ref(null)
 
-function remove_card(name) {
+function remove_user(name) {
     users.value = users.value.filter((e) => e.name !== name)
 }
 
@@ -40,7 +40,7 @@ watch(page, get_users)
         <UserCard 
         class="me-2 mb-3" 
         style="width: 32%;" 
-        @response="(name) => remove_card(name)" 
+        @response="(name) => remove_user(name)" 
         v-for="user in users"
         :key="user.id" 
         :data="user" 

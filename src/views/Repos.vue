@@ -22,7 +22,7 @@ async function get_repos() {
   const res = await props.octokit.request('GET /orgs/{org}/repos', {
     org: 'MSIA',
     page: page,
-    per_page: 40,
+    per_page: 50,
     sort: 'updated',
     direction: 'asc',
     headers: {
