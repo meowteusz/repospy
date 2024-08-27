@@ -16,7 +16,7 @@ async function delete_user(username) {
     deleting_text.value = 'Wait...'
 
     let res = await props.octokit.request('DELETE /orgs/{org}/members/{username}', {
-        org: 'MSIA',
+        org: 'NUMLDS',
         username: username,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'

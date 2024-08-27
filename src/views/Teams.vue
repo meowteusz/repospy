@@ -21,7 +21,7 @@ async function get_teams() {
   teams.value = null
 
   const res = await props.octokit.request('GET /orgs/{org}/teams', {
-    org: 'MSIA',
+    org: 'NUMLDS',
     page: page,
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'

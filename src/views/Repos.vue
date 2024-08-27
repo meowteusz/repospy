@@ -20,7 +20,7 @@ function remove_card(name) {
 async function get_repos() {
   repos.value = null
   const res = await props.octokit.request('GET /orgs/{org}/repos', {
-    org: 'MSIA',
+    org: 'NUMLDS',
     page: page,
     per_page: 50,
     sort: 'updated',

@@ -20,7 +20,7 @@ function remove_user(name) {
 async function get_users() {
     users.value = null
 
-    const res = await props.octokit.request('GET /orgs/MSIA/members', {
+    const res = await props.octokit.request('GET /orgs/NUMLDS/members', {
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
         }

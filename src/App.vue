@@ -29,6 +29,6 @@ const octokit = new Octokit({
     <div class="container-fluid" style="max-width: 85%;">
       <RouterView :octokit="octokit" />
     </div>
-    <footer class="pt-3 mt-4 text-body-secondary border-top">© 2023 MLDS IT</footer>
+    <footer class="pt-3 mt-4 text-body-secondary border-top">© 2024 MLDS IT</footer>
   </div>
 </template>

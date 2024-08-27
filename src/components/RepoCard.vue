@@ -45,7 +45,7 @@ async function delete_repo(repo_name) {
   deleting.value = true
   deleting_text.value = 'Wait...'
 
-  let res = await props.octokit.request('DELETE /repos/MSIA/{repo}', {
+  let res = await props.octokit.request('DELETE /repos/NUMLDS/{repo}', {
     repo: repo_name,
     headers: {
       'X-GitHub-Api-Version': '2022-11-28'
